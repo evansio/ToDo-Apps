@@ -35,50 +35,87 @@
    ```
 7. Creación de archivo `.gitignore` y adición de archivos y directorios ignorados: directorio: `venv`,  archivo `.gitignore` 
 
-8. Creación de proyecto Django `to_do_list_app`
+8. Creación de proyecto Django `todo_list`
     ```bash
-    django-admin startproject base
+    django-admin startproject todo_list
     ```
 9. Creación de nueva aplicación dentro del proyecto
     ```bash
-    cd base # Cambia al sub-directorio para trabajos de desarrollo
-    python manage.py startapp tasks
+    cd todo_list # Cambia al sub-directorio para trabajos de desarrollo
+    python manage.py startapp base
     ```
 
 ---
 
 ## Step 2: Diseño del modelo de datos
 
-1. Configuración de aplicación creada en el archivo `to_do_list_app\settings.py`
+1. Configuración de aplicación creada en el archivo `todo_list\settings.py`
 
 ```python
 INSTALLED_APPS = [
     ...,
-    'tasks',
+    'base.apps.BaseConfig', 
+    # Directorio 'base', archivo 'apps.py', clase 'BaseConfig' 
 ]
 ```
 
-2. Abre el archivo `tasks\models.py` y define el modelo Task con los campos requeridos (título, descripción, fecha de creación, estado):
+2. Crear archivo urls.py en `base\urls.py`
+   * Abre el archivo creado `base\urls.py` en el editor de código.
+   * Importa los módulos necesarios de Django:
+   
+```python
+	from django.urls import path
+	from . import views
+```
+
+   * Define las URL para cada vista creada en `base\views.py`:
+   
+```python
+	urlpatterns = [
+	    
+	]
+```
+
+3. Configurar las URLs en el Proyecto Principal
+
+    * Abre el archivo urls.py en la carpeta principal del proyecto (todo_list/urls.py).
+    * Importa las funciones include y las URL de la aplicación base:
+  
+    ```python
+    from django.contrib import admin
+    from django.urls import path, include # Add include
+    ```
+
+    * Agrega la URL de la aplicación base al archivo de URLs principal:
+    
+    ```python
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('base.urls')), # Add path
+    ]
+    ```
+
+4. Abre el archivo `base\models.py` y define el modelo base con los campos requeridos (título, descripción, fecha de creación, estado):
    ```python
     from django.db import models
     from django.contrib.auth.models import User
 
     class Task(models.Model):
-        title = models.CharField(max_length=100)
-        description = models.TextField()
-        created_at = models.DateTimeField(auto_now_add=True)
-        STATUS_CHOICES = [
-            ('pending', 'Pendiente'),
-            ('completed', 'Completado'),
-        ]
-        status = models.CharField(max_length=20, choices=STATUS_CHOICES)
-        user = models.ForeignKey(User, on_delete=models.CASCADE)
+	    user = models.ForeignKey(
+	        User, on_delete=models.CASCADE, null=True, blank=True)
+	    title = models.CharField(max_length=200)
+	    description = models.TextField(null=True, blank=True)
+	    complete = models.BooleanField(default=False)
+	    created = models.DateTimeField(auto_now_add=True)
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        order_with_respect_to = 'user'
    ```
 
-3. Realizar migraciones para aplicar los cambios al modelo de datos:
+5. Realizar migraciones para aplicar los cambios al modelo de datos:
    ```bash
     python manage.py makemigrations
     python manage.py migrate
@@ -89,8 +126,8 @@ INSTALLED_APPS = [
 ## Step 3: Implementación de funcionalidades
 1. Crea las vistas y URLs en `tasks\views.py` y `tasks\urls.py` para realizar las operaciones CRUD (crear, leer, actualizar, eliminar tareas).
    
-   1.1. **Crear Vistas en `tasks\views.py`**  
-    * Abre el archivo `tasks\views.py` en tu editor de código.
+   1.1. **Crear Vistas en `base\views.py`**  
+    * Abre el archivo `base\views.py` en tu editor de código.
     * Importa los módulos necesarios de Django:
     
     ``` python    
@@ -153,30 +190,10 @@ INSTALLED_APPS = [
         return render(request, 'tasks/task_confirm_delete.html', {'task': task})
         ```    
 
-   1.2. **Crear URLs en `tasks\urls.py`**
-
-   * Abre el archivo `tasks\urls.py` en el editor de código.
-   * Importa los módulos necesarios de Django:
    
-    ```python
-    from django.urls import path
-    from . import views
-    ```
-
-   * Define las URL para cada vista creada en `tasks\views.py`:
+    1.2 **Crear Formularios** 
     
-    ```python
-    urlpatterns = [
-        path('', views.task_list, name='task_list'),
-        path('task/create/', views.create_task, name='create_task'),
-        path('task/<int:pk>/update/', views.update_task, name='update_task'),
-        path('task/<int:pk>/delete/', views.delete_task, name='delete_task'),
-    ]
-    ```
-
-    1.3 **Crear Formularios** 
-    
-    * Crea un archivo `tasks\forms.py`.
+    * Crea un archivo `base\forms.py`.
     * Define un formulario para la tarea en forms.py:
 
     ```python
@@ -189,25 +206,7 @@ INSTALLED_APPS = [
             fields = ['title', 'description', 'status']
     ```
 
-    1.4 **Configurar las URLs en el Proyecto Principal**
-
-    * Abre el archivo urls.py en la carpeta principal del proyecto (todoapp/urls.py).
-    * Importa las funciones include y las URL de la aplicación tasks:
-  
-    ```python
-    from django.contrib import admin
-    from django.urls import path, include
-    ```
-
-    * Agrega la URL de la aplicación tasks al archivo de URLs principal:
     
-    ```python
-    urlpatterns = [
-        path('admin/', admin.site.urls),
-        path('', include('tasks.urls')),
-    ]
-    ```
-
    
 2. Implementa la lógica para la autenticación de usuarios utilizando Django's auth module.
 
