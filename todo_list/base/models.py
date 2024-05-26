@@ -9,8 +9,8 @@ class Task(models.Model):
     complete = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
 
-class Meta:
-    order_with_respect_to = 'user'
+    class Meta:
+        ordering = ['complete']
