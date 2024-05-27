@@ -1,12 +1,11 @@
 {% extends 'base/main.html' %}
+{% load static %}
 {% block content %}
-
-<h3>Formulario</h3>
-<a href="{% url 'tasks' %}">Regresar</a>
-<form method="POST" action="">
+<h3>Formulario de Tarea</h3>
+<form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
-
+<a href="{% url 'tasks' %}" class="button">Regresar</a>
 {% endblock content %}

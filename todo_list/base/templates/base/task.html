@@ -1,1 +1,7 @@
-<h1>Task: {{task}}</h1>
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<h1>Tarea: {{ task.title }}</h1>
+<p>{{ task.description }}</p>
+<a href="{% url 'tasks' %}" class="button">Volver a la lista</a>
+{% endblock content %}

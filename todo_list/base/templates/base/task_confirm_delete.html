@@ -1,11 +1,12 @@
 {% extends 'base/main.html' %}
+{% load static %}
 {% block content %}
+<h3>Confirmar eliminación</h3>
+<p>¿Estás seguro de que quieres eliminar esta tarea? <strong>{{ task }}</strong></p>
 
-<a href="{% url 'tasks' %}">Volver a la lista</a>
 <form method="POST">
     {% csrf_token %}
-    <p>¿Estás seguro de que quieres eliminar esta tarea? {{ task }}</p>
     <input type="submit" value="Eliminar">
+    <a href="{% url 'tasks' %}" class="button">Cancelar</a>
 </form>
-
 {% endblock content %}
