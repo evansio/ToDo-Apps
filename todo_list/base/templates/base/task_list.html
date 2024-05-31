@@ -9,17 +9,21 @@
     {% if request.user.is_authenticated %}
     <form method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
-        <button type="submit">Logout</button>
+        <button type="submit">Cerra sesión</button>
     </form>
     {% else %}
-    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'login' %}">Iniciar sesión</a>
     {% endif %}
 </div>
 
 <hr>
 <h1>ToDo APP</h1>
 
-<a href="{% url 'task-create' %}">Add Task</a>
+
+<form method="POST" action="{% url 'task-create' %}">
+    {% csrf_token %}
+    <button action="submit">Nueva tarea</button>
+</form>
 
 <form method="GET">
     <input type="text" name="search-area" value="{{search_input}}" placeholder="Buscar tareas">
@@ -29,8 +33,8 @@
 <table>
     <thead>
         <tr>
-            <th>Items</th>
-            <th>Actions</th>
+            <th>Tarea</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -38,9 +42,9 @@
         <tr>
             <td>{{ task.title }}</td>
             <td>
-                <a href="{% url 'task' task.id %}">View</a>
-                <a href="{% url 'task-update' task.id %}">Edit</a>
-                <a href="{% url 'task-delete' task.id %}">Delete</a>
+                <a href="{% url 'task' task.id %}">Ver  |</a>
+                <a href="{% url 'task-update' task.id %}">  Editar  |</a>
+                <a href="{% url 'task-delete' task.id %}">  Eliminar</a>
             </td>
         </tr>
         {% endfor %}
