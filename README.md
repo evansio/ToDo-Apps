@@ -19,11 +19,11 @@ To Do App presenta las siguiente funcionalidades:
 **Confirmación de eliminación:** Formulario para validar tareas eliminadas.
 
 ---
-<img src="img_port/ToDo APP.jpg" alt="Estructure" width="800"/>
+<img src="img_port/ToDo APP.jpg" alt="Estructure" width="700"/>
 ---
 
 # Estructura del proyecto
-<img src="img_port/Estructura del proyecto.jpg" alt="Estructure" width="800"/>
+<img src="img_port/Estructura del proyecto.jpg" alt="Estructure" width="700"/>
 
 ---
 # Paso a paso del proyecto 
