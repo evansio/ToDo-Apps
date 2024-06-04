@@ -19,20 +19,11 @@ To Do App presenta las siguiente funcionalidades:
 **Confirmación de eliminación:** Formulario para validar tareas eliminadas.
 
 ---
-<div style="display: flex; justify-content: space-between;">
-    <img src="img_port/ToDo APP.jpg" alt="Main" style="width: 35%;"/>
-    <img src="img_port/Registro.jpg" alt="Login" style="width: 35%;"/>
-    <img src="img_port/Crear tarea.jpg" alt="Imagen 3" style="width: 30%;"/>
-</div>
-<div style="display: flex; justify-content: space-between;">
-    <img src="img_port/Inicio de sesion.jpg" alt="Main" style="width: 45%;"/>
-    <img src="img_port/Eliminar tarea.jpg" alt="Login" style="width: 55%;"/>
-</div>
-
+<img src="img_port/ToDo APP.jpg" alt="Estructure" width="800"/>
 ---
 
 # Estructura del proyecto
-<img src="img_port/Estructura del proyecto.jpg" alt="Estructure" width="500"/>
+<img src="img_port/Estructura del proyecto.jpg" alt="Estructure" width="800"/>
 
 ---
 # Paso a paso del proyecto 
