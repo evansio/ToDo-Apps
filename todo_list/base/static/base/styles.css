@@ -44,6 +44,10 @@ input[type="text"], input[type="password"], input[type="submit"], button {
     border: 1px solid #ccc;
 }
 
+input[type="text"], input[type="password"] {
+    width: 96.2%;
+}
+
 button {
     background-color: #5cb85c;
     color: white;
@@ -55,7 +59,7 @@ button:hover {
 }
 
 a {
-    color: #5cb85c;
+    color: #4b5156;
     text-decoration: none;
 }
 
@@ -80,9 +84,24 @@ th {
 }
 
 .task-complete-icon {
+    margin-right: 10px;
     height: 20px;
     width: 20px;
     color: green;
+    background-color: green;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.task-incomplete-icon {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    color: black;
+    background-color: rgb(208, 208, 215);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -109,6 +128,10 @@ th {
 }
 
 .delete-link {
-    color: red;
+    text-decoration: none;
+    font-weight: 900;
+    color: #cf4949;
+    font-size: 22px;
     cursor: pointer;
+    line-height: 0;
 }
